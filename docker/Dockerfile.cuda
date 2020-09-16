@@ -88,6 +88,9 @@ ENV LANG en_US.UTF-8
 # install ISCE from RPM
 COPY --from=0 /tmp/isce2-2.3-1.x86_64.rpm /tmp/isce2-2.3-1.x86_64.rpm
 
+# update isce3 image's entrypoint to source isce2 env
+COPY ./docker/entrypoint_source.isce /opt/docker/bin/entrypoint_source.isce
+
 # install isce and its minimal requirements
 RUN set -ex \
  && sudo /opt/conda/bin/conda install --yes \

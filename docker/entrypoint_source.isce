@@ -1,0 +1,9 @@
+# Set paths to ISCE3
+export ISCEDIR=/opt/isce
+export PATH=$ISCEDIR/bin:$ISCEDIR/packages:$PATH
+export PYTHONPATH=$ISCEDIR/packages:$PYTHONPATH
+export LD_LIBRARY_PATH=$ISCEDIR/lib64:$LD_LIBRARY_PATH
+
+
+# Set paths to ISCE2
+source /opt/isce2/isce_env.sh
