@@ -1,4 +1,4 @@
-FROM isce:3-develop
+FROM hysds/cuda-dev:latest
 
 # Set an encoding to make things work smoothly.
 ENV LANG en_US.UTF-8
