@@ -75,8 +75,8 @@ RUN set -ex \
     > /tmp/rpm-build/opt/isce2/version.json \
  && hash=$(cat /tmp/rpm-build/opt/isce2/version.json | jq -r .object.sha) \
  && short_hash=$(echo $hash | cut -c1-5) \
- && fpm -s dir -t rpm -C /tmp/rpm-build --name isce \
-      --prefix=/ --version=2.3 --provides=isce \
+ && fpm -s dir -t rpm -C /tmp/rpm-build --name isce2 \
+      --prefix=/ --version=2.3 --provides=isce2 \
       --maintainer=piyush.agram@jpl.nasa.gov \
       --description="InSAR Scientific Computing Environment v2 (${hash})"
 
@@ -86,7 +86,7 @@ FROM isce:3-develop
 ENV LANG en_US.UTF-8
 
 # install ISCE from RPM
-COPY --from=0 /tmp/isce-2.3-1.x86_64.rpm /tmp/isce-2.3-1.x86_64.rpm
+COPY --from=0 /tmp/isce2-2.3-1.x86_64.rpm /tmp/isce2-2.3-1.x86_64.rpm
 
 # install isce and its minimal requirements
 RUN set -ex \
@@ -109,7 +109,7 @@ RUN set -ex \
  && sudo ln -s /lib64/libuuid.so.1.3.0 libuuid.so.1 \
  && cd /lib64 \
  && ( test -f libgfortran.so || sudo ln -sv libgfortran.so.*.* libgfortran.so ) \
- && sudo yum install -y /tmp/isce-2.3-1.x86_64.rpm \
+ && sudo yum install -y /tmp/isce2-2.3-1.x86_64.rpm \
  && sudo yum clean all \
  && sudo rm -rf /var/cache/yum \
- && sudo rm /tmp/isce-2.3-1.x86_64.rpm
+ && sudo rm /tmp/isce2-2.3-1.x86_64.rpm
